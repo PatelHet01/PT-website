@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <!-- Link to the external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Beautiful Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <!-- Logo or Brand Name -->
+            <div class="logo">
+                <a href="{{ url_for('home') }}">EventBook</a>
+            </div>
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('events') }}">Events</a></li>
+            </ul>
+            <!-- Login/Signup Button -->
+            <div class="login-btn">
+                <a href="{{ url_for('login') }}" class="btn">Login/Signup</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content Area -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer (optional) -->
+    <footer>
+        <p>&copy; 2024 EventBook. All rights reserved.</p>
+    </footer>
+</body>
+</html>
