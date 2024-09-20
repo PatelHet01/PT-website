@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <!-- Link to the external CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}P Events{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+   
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
-    <!-- Beautiful Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <!-- Logo or Brand Name -->
-            <div class="logo">
-                <a href="{{ url_for('home') }}">EventBook</a>
-            </div>
-            <!-- Navigation Links -->
-            <ul class="nav-links">
+    <header>
+        <nav>
+            <ul>
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('about') }}">About Us</a></li>
-                <li><a href="{{ url_for('contact') }}">Contact</a></li>
                 <li><a href="{{ url_for('events') }}">Events</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
             </ul>
-            <!-- Login/Signup Button -->
-            <div class="login-btn">
-                <a href="{{ url_for('login') }}" class="btn">Login/Signup</a>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
     
-    <!-- Main Content Area -->
-    <div class="content">
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
-    </div>
+    </main>
 
-    <!-- Footer (optional) -->
     <footer>
-        <p>&copy; 2024 EventBook. All rights reserved.</p>
+        <p>&copy; 2024 P Events. All rights reserved.</p>
     </footer>
 </body>
 </html>

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+
+{% block title %}Home - P Events{% endblock %}
+
 {% block content %}
-<h1>Welcome to Our Event Ticket Booking</h1>
-<p>Book tickets for the best events in town!</p>
+<h1>Welcome to P Events!</h1>
+<p>Your one-stop destination for all events in India.</p>
+<img src="{{ url_for('static', filename='images/home_banner.jpg') }}" alt="Home Banner">
 {% endblock %}

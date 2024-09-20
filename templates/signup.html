@@ -1,13 +1,105 @@
+<!-- templates/signup.html -->
 {% extends "base.html" %}
+
 {% block content %}
-<h1>Signup</h1>
-<form action="{{ url_for('signup') }}" method="post">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    
-    <button type="submit">Signup</button>
-</form>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signup.css') }}"> <!-- Link to your CSS file -->
+
+<div class="login-page">
+    <div class="form">
+        <form class="register-form" method="POST" action="{{ url_for('signup') }}">
+            <h1>Create Account</h1>
+            <span>or use your email for registration</span>
+            <input type="text" name="name" placeholder="Name" required />
+            <input type="date" name="dob" placeholder="Date of Birth" required />
+            <input type="text" name="mobile" placeholder="Mobile Number" required />
+            <select name="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <select name="city" required>
+                <option value="" disabled selected>Select City</option>
+                <!-- List of Indian cities -->
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Kanpur">Kanpur</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Indore">Indore</option>
+                <option value="Thane">Thane</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Visakhapatnam">Visakhapatnam</option>
+                <option value="Pimpri-Chinchwad">Pimpri-Chinchwad</option>
+                <option value="Patna">Patna</option>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Ghaziabad">Ghaziabad</option>
+                <option value="Ludhiana">Ludhiana</option>
+                <option value="Agra">Agra</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Faridabad">Faridabad</option>
+                <option value="Meerut">Meerut</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Kalyan-Dombivali">Kalyan-Dombivali</option>
+                <option value="Vasai-Virar">Vasai-Virar</option>
+                <option value="Varanasi">Varanasi</option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Aurangabad">Aurangabad</option>
+                <option value="Dhanbad">Dhanbad</option>
+                <option value="Amritsar">Amritsar</option>
+                <option value="Navi Mumbai">Navi Mumbai</option>
+                <option value="Allahabad">Allahabad</option>
+                <option value="Ranchi">Ranchi</option>
+                <option value="Howrah">Howrah</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Jabalpur">Jabalpur</option>
+                <option value="Gwalior">Gwalior</option>
+                <option value="Vijayawada">Vijayawada</option>
+                <option value="Jodhpur">Jodhpur</option>
+                <option value="Madurai">Madurai</option>
+                <option value="Raipur">Raipur</option>
+                <option value="Kota">Kota</option>
+                <option value="Guwahati">Guwahati</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Solapur">Solapur</option>
+                <option value="Hubli-Dharwad">Hubli-Dharwad</option>
+                <option value="Bareilly">Bareilly</option>
+                <option value="Mysore">Mysore</option>
+                <option value="Tiruchirappalli">Tiruchirappalli</option>
+                <option value="Guntur">Guntur</option>
+                <option value="Amravati">Amravati</option>
+                <option value="Noida">Noida</option>
+                <option value="Jamshedpur">Jamshedpur</option>
+                <option value="Bhiwandi">Bhiwandi</option>
+                <option value="Cuttack">Cuttack</option>
+                <option value="Firozabad">Firozabad</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Bhavnagar">Bhavnagar</option>
+                <option value="Dehradun">Dehradun</option>
+                <option value="Durgapur">Durgapur</option>
+                <option value="Asansol">Asansol</option>
+                <option value="Rourkela">Rourkela</option>
+                <!-- Add more cities as needed -->
+            </select>
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required />
+            <button type="submit">Create</button>
+            <p class="message">Already registered? <a href="{{ url_for('login') }}">Sign In</a></p>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script> <!-- Link to your JS file -->
 {% endblock %}
