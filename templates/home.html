@@ -1,9 +1,20 @@
 {% extends "base.html" %}
-
 {% block title %}Home - P Events{% endblock %}
-
 {% block content %}
-<h1>Welcome to P Events!</h1>
-<p>Your one-stop destination for all events in India.</p>
-<img src="{{ url_for('static', filename='images/home_banner.jpg') }}" alt="Home Banner">
+<header>
+    <div class="section__container header__container">
+        <div class="header__content">
+            <div>
+                <p class="sub__header">Book Now</p>
+                <h1>The Smiling <br />agent for Events</h1>
+                <p class="section__subtitle">
+                    We're Now in Ahmedabad!
+                </p>
+                <div class="action__btns">
+                    <button class="btn">Plan an Event</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 {% endblock %}

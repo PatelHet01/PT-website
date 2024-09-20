@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Host Event - P Events{% endblock %}
+{% block content %}
+
+<br><br><br><br>
+
+
+<div id="host-event-container">
+    <h1>Create Event</h1>
+    <p>Provide basic event details to get started. Once the event is created, you'll be directed to the event admin dashboard where you can edit the tickets and event details.</p>
+    
+    <form id="event-form">
+        <label for="event-name">Event Name *</label>
+        <input type="text" id="event-name" name="event-name" placeholder="Event Name" required>
+
+        <div class="date-time-container">
+            <div>
+                <label for="starts-on">Starts On *IST</label>
+                <input type="datetime-local" id="starts-on" name="starts-on" required>
+            </div>
+            <div>
+                <label for="ends-on">Ends On *IST</label>
+                <input type="datetime-local" id="ends-on" name="ends-on" required>
+            </div>
+        </div>
+
+        <label for="time-zone">Time Zone *</label>
+        <select id="time-zone" name="time-zone" required>
+            <option value="GMT+5:30">GMT+5:30 (Chennai, Kolkata, Mumbai, New Delhi)</option>
+            <option value="GMT+5:00">GMT+5:00 (Sri Jayawardenepura Kotte)</option>
+            <option value="GMT+6:00">GMT+6:00 (Dhaka)</option>
+            <option value="GMT+5:45">GMT+5:45 (Kathmandu)</option>
+            <option value="GMT+6:30">GMT+6:30 (Cocos Islands)</option>
+            <option value="GMT+7:00">GMT+7:00 (Bangkok, Hanoi, Jakarta)</option>
+        </select>
+
+        <label for="event-type">Event Type *</label>
+        <select id="event-type" name="event-type" required>
+            <option value="free">Free</option>
+            <option value="paid">Paid</option>
+        </select>
+
+        <label for="event-mode">Event Mode *</label>
+        <select id="event-mode" name="event-mode" required>
+            <option value="" disabled selected>Select...</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+        </select>
+
+        <button type="submit" id="create-event-btn">Create Event</button>
+    </form>
+</div>
+
+
+
+
+
+{% endblock %}

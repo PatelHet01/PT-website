@@ -3,40 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}P Events{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-   
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
-
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('about') }}">About Us</a></li>
-                <li><a href="{{ url_for('events') }}">Events</a></li>
-                <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('signup') }}">Signup</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="flash {{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </main>
+    <nav>
+        <div class="nav__logo"><a href="{{ url_for('home') }}">Privent</a><span>.</span></div>
+        <ul class="nav__links">
+            <li class="link"><a href="{{ url_for('community') }}">Community</a></li>
+            <li class="link"><a href="{{ url_for('events') }}">Events</a></li>
+            <li class="link"><a href="{{ url_for('features') }}">Features</a></li>
+            <li class="link"><a href="{{ url_for('resources') }}">Resources</a></li>
+            <li class="link"><a href="{{ url_for('pricing') }}">Pricing</a></li>
+            <li class="link"><a href="{{ url_for('marketplace') }}">Marketplace</a></li><br>
+            <a href="{{ url_for('host') }}">
+                <button type="button" class="custom-button">Host Event</button>
+            </a>
+            <a href="{{ url_for('login') }}">
+                <button type="button" class="custom-button">Log In</button>
+            </a>
+        </ul>
+    </nav>
 
-    <footer>
-        <p>&copy; 2024 P Events. All rights reserved.</p>
+
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <div class="section__container footer__container">
+            <div class="footer__col">
+                <h3>Privent<span>.</span></h3>
+                <p>
+                    Explore your suitable and dream events around the world. Here you
+                    can find your right event.
+                </p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.3703210134486!2d72.49308647530246!3d23.083535814050578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9d5b0ab07c7b%3A0x2b1c27766795a2eb!2sCOGNIAN%20Incubation%20%26%20Research%20Center%2C%20SAL%20Education!5e0!3m2!1sen!2sin!4v1698657379556!5m2!1sen!2sin"
+                    width="300" height="300" style="border-radius: 150px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="footer__col">
+                <h4>Support</h4>
+                <p>FAQs</p>
+                <p>Terms & Conditions</p>
+                <p>Privacy Policy</p>
+                <p>Contact Us</p>
+            </div>
+            <div class="footer__col">
+                <h4>Contact us</h4>
+                <p>
+                    <span>Address:</span> Cognian Incubation and Research Center, SAL Education Campus, Ahmedabad
+                </p>
+                <p><span>Email:</span> info@Everaah.com</p>
+                <p><span>Phone:</span> +91 8320769298</p>
+            </div>
+        </div>
+        <div class="footer__bar">
+            Copyright © 2023 Het Patel. All rights reserved.
+        </div>
     </footer>
 </body>
 </html>
