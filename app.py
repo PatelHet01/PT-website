@@ -18,6 +18,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
+# Configure Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.example.com'  # Your mail server
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'your_email@example.com'
+app.config['MAIL_PASSWORD'] = 'your_email_password'
+app.config['MAIL_DEFAULT_SENDER'] = 'your_email@example.com'
+
+mail = Mail(app)
+
 # User model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -125,6 +135,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
+        flash('Signup successful! You can now log in.', 'success')
         return redirect(url_for('login'))  # Redirect to login page after signup
 
     return render_template('signup.html')
@@ -194,16 +205,6 @@ def forgot_password():
         return redirect(url_for('login'))
 
     return render_template('forgot_password.html')
-
-app.config['MAIL_SERVER'] = 'smtp.example.com'  # Your mail server
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'your_email@example.com'
-app.config['MAIL_PASSWORD'] = 'your_email_password'
-app.config['MAIL_DEFAULT_SENDER'] = 'your_email@example.com'
-
-mail = Mail(app)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
