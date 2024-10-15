@@ -121,6 +121,7 @@ def host():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        username = request.form['username']  # Capture the username
         email = request.form['email']
         password = request.form['password']
         
@@ -131,11 +132,13 @@ def signup():
             return redirect(url_for('signup'))  # Redirect back to signup page
 
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = User(email=email, password=hashed_password)
+        
+        # Create new user instance
+        new_user = User(username=username, email=email, password=hashed_password)  # Include username here
         db.session.add(new_user)
         db.session.commit()
 
-        flash('Signup successful! You can now log in.', 'success')
+        flash('Account created successfully!', 'success')  # Flash success message
         return redirect(url_for('login'))  # Redirect to login page after signup
 
     return render_template('signup.html')
