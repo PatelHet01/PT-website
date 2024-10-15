@@ -121,28 +121,30 @@ def host():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']  # Capture the username
-        email = request.form['email']
+        username = request.form['username']
         password = request.form['password']
-        
-        # Validate the password
-        is_valid, message = validate_password(password)
-        if not is_valid:
-            flash(message)  # Flash the validation message
-            return redirect(url_for('signup'))  # Redirect back to signup page
+        email = request.form['email']
 
+        # Check if the email already exists
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash('Email address already exists. Please use a different email.', 'danger')
+            return redirect(url_for('signup'))  # Redirect back to the signup page
+
+        # If the email is unique, proceed to create the new user
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        
-        # Create new user instance
-        new_user = User(username=username, email=email, password=hashed_password)  # Include username here
-        db.session.add(new_user)
-        db.session.commit()
+        new_user = User(username=username, password=hashed_password, email=email)
 
-        flash('Account created successfully!', 'success')  # Flash success message
-        return redirect(url_for('login'))  # Redirect to login page after signup
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Registration successful!', 'success')
+            return redirect(url_for('login'))  # Redirect to the login page
+        except Exception as e:
+            db.session.rollback()
+            flash('An error occurred during registration. Please try again.', 'danger')
 
-    return render_template('signup.html')
-
+    return render_template('signup.html')  # Render your signup template
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
