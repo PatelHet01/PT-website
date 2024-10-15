@@ -7,11 +7,10 @@
 
 <br><br><br><br>
 
-
 <div class="wrapper">
     <div class="title">Login Form</div>
     <div class="form">
-        <form id="loginForm" action="/login" method="post">
+        <form id="loginForm" action="{{ url_for('login') }}" method="post">
             <div class="inputfield">
                 <label for="email">Email Id</label>
                 <input type="email" class="input" id="email" name="email" placeholder="abc@mail.com" required>
@@ -49,4 +48,14 @@
         <p>By signing up, I accept the Everaah <a href="tnc.html">Terms & Conditions</a> and Code Of Conduct, and have read the Privacy Policy. I agree to Everaah sharing my information with the event organizer and receiving event-related updates.</p>
     </div>
 </div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 {% endblock %}
