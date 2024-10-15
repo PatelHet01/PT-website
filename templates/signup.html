@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Sign Up - P Events{% endblock %}
+
+{% block content %}
+    <br><br><br><br>
+
+    <div class="wrapper">
+        <div class="title">Sign Up Form</div>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="form">
+            <form id="signupForm" action="/signup" method="post">
+                <div class="inputfield">
+                    <label for="email">Email Id</label>
+                    <input type="email" class="input" id="email" name="email" placeholder="abc@mail.com" required>
+                </div>
+                <div class="inputfield">
+                    <label for="password">Password</label>
+                    <input type="password" class="input" id="password" name="password" placeholder="ex- signup_karo@1234" required>
+                </div>
+                <div class="inputfield terms">
+                    <label class="check">
+                        <input type="checkbox" id="agree" name="agree" required>
+                        <span class="checkmark"></span>
+                    </label>
+                    <p>Agreed to <a href="tnc.html">Terms and Conditions</a></p>
+                </div>
+                <div class="inputfield">
+                    <input type="submit" value="Sign Up" class="btn">
+                </div>
+                <div class="inputfield">
+                    <a href="index.html"><input type="button" value="Back to Home" class="btn"></a>
+                </div>
+            </form>
+            <p>Already have an account? <a href="login.html">Log in</a></p>
+        </div>
+    </div>
+{% endblock %}
