@@ -7,5 +7,5 @@ while true; do
     git push origin master # Change 'main' to your branch name if different
     
     # Sleep for a specified interval (e.g., 60 seconds)
-    sleep 60
+    sleep 150
 done
