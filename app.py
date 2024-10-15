@@ -21,8 +21,21 @@ bcrypt = Bcrypt(app)
 # User model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+    username = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event_name = db.Column(db.String(150), nullable=False)
+    starts_on = db.Column(db.DateTime, nullable=False)
+    ends_on = db.Column(db.DateTime, nullable=False)
+    time_zone = db.Column(db.String(50), nullable=False)
+    event_type = db.Column(db.String(20), nullable=False)
+    event_mode = db.Column(db.String(20), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    user = db.relationship('User', backref=db.backref('events', lazy=True))
 
 # Initialize the database and create tables if they don't exist
 with app.app_context():
@@ -56,11 +69,43 @@ def pricing():
 def marketplace():
     return render_template('marketplace.html')
 
-# Route for hosting an event
-@app.route('/host', methods=['GET'])
+@app.route('/host', methods=['GET', 'POST'])
 def host():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))  # Redirect to login if user is not logged in
+    if request.method == 'POST':
+        # Get form data
+        event_name = request.form['event-name']
+        starts_on = request.form['starts-on']
+        ends_on = request.form['ends-on']
+        time_zone = request.form['time-zone']
+        event_type = request.form['event-type']
+        event_mode = request.form['event-mode']
+        
+        # Get the user ID from the session
+        user_id = session.get('user_id')  # Assumes user ID is stored in session after login
+        
+        # Check if the user is logged in
+        if not user_id:
+            flash("You must be logged in to host an event.", "danger")
+            return redirect(url_for('login'))  # Redirect to login page if not logged in
+
+        # Create a new event instance
+        new_event = Event(
+            event_name=event_name,
+            starts_on=starts_on,
+            ends_on=ends_on,
+            time_zone=time_zone,
+            event_type=event_type,
+            event_mode=event_mode,
+            user_id=user_id
+        )
+
+        # Add the event to the session and commit to the database
+        db.session.add(new_event)
+        db.session.commit()
+        
+        flash("Event created successfully!", "success")
+        return redirect(url_for('dashboard'))  # Redirect to event admin dashboard
+
     return render_template('host.html')
 
 @app.route('/signup', methods=['GET', 'POST'])

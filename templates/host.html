@@ -4,12 +4,11 @@
 
 <br><br><br><br>
 
-
 <div id="host-event-container">
     <h1>Create Event</h1>
     <p>Provide basic event details to get started. Once the event is created, you'll be directed to the event admin dashboard where you can edit the tickets and event details.</p>
     
-    <form id="event-form">
+    <form id="event-form" method="POST" action="{{ url_for('host') }}">
         <label for="event-name">Event Name *</label>
         <input type="text" id="event-name" name="event-name" placeholder="Event Name" required>
 
@@ -50,9 +49,5 @@
         <button type="submit" id="create-event-btn">Create Event</button>
     </form>
 </div>
-
-
-
-
 
 {% endblock %}
